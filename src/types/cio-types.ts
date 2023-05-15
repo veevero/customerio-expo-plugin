@@ -15,6 +15,7 @@ export type CustomerIOPluginOptionsIOS = {
   iosDeploymentTarget?: string;
   appleTeamId?: string;
   appName?: string;
+  manualDeviceRegistration?: boolean;
   disableNotificationRegistration?: boolean;
   useFrameworks?: 'static' | 'dynamic';
   pushNotification?: {

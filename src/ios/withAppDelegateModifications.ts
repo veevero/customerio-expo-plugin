@@ -146,16 +146,20 @@ export const withAppDelegateModifications: ConfigPlugin<
 
       // any other value would be treated as true, it has to be explicitly false to disable
       if (
+        !props.manualDeviceRegistration &&
         props.disableNotificationRegistration !== undefined &&
         props.disableNotificationRegistration === false
       ) {
         stringContents = addNotificationConfiguration(stringContents);
       }
       stringContents = addAdditionalMethodsForPushNotifications(stringContents);
-      stringContents =
-        addDidFailToRegisterForRemoteNotificationsWithError(stringContents);
-      stringContents =
-        addDidRegisterForRemoteNotificationsWithDeviceToken(stringContents);
+
+      if (!props.manualDeviceRegistration) {
+        stringContents =
+          addDidFailToRegisterForRemoteNotificationsWithError(stringContents);
+        stringContents =
+          addDidRegisterForRemoteNotificationsWithDeviceToken(stringContents);
+      }
 
       config.modResults.contents = stringContents;
     } else {
